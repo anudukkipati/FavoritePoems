@@ -1,0 +1,4 @@
+<h3><%=@poem.title%></h3>
+<h4>Poem Posted By: <%=link_to @poem.user.name, user_path(@poem.user)%> </h4>
+
+<div><%= @poem.content%></div>

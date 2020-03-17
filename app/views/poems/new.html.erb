@@ -1,0 +1,26 @@
+<% if @poem.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@poem.errors.count, "error") %> prohibited this from being saved:</h2>
+
+    <ul>
+    <% @poem.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<br><br>
+<br><br>
+<%= form_for(@poem) do |f|%>
+<%= f.label :title %>
+  <%= f.text_field :title %>
+  <br><br>
+  <br><br>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <br><br>
+  <br><br>
+
+  <%= f.submit %>
+
+<% end %>
