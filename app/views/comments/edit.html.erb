@@ -1,0 +1,16 @@
+<h3>Edit Comment</h3>
+
+<%= render partial: "layouts/errors", locals: {object: @comment} %>
+
+<%= form_for(@comment) do |f|%>
+
+  <%= f.label :poem %>
+  <%= f.collection_select :poem_id, Poem.all, :id, :title %>
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+
+  <%= f.submit %>
+
+<% end %>

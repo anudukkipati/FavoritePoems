@@ -1,0 +1,7 @@
+<h2><%= @comment.content%> - <%= @comment.user.username%></h2>
+
+<% if @comment.user == current_user %>
+  <%= link_to "Edit Comment", edit_comment_path(@comment)%>
+<% end %>
+
+<h4>Read the poem here: <%= link_to @comment.poem.title, poem_path(@comment.poem_id) %></h4>

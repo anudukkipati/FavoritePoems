@@ -1,0 +1,12 @@
+
+<% if @poem %>
+  <h3>Comments for <%= @poem.title%></h3>
+<% else %>
+  <h1>All Comments</h1>
+<% end %>
+
+<ul>
+<% @comments.each do |comment|%>
+  <li><%= comment.user.name%> says "<%= comment.content%>" about this poem: <strong><%= link_to comment.poem.title, poem_path(comment.poem_id) %></strong></li>
+<% end %>
+</ul>
