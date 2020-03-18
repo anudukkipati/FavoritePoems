@@ -2,15 +2,15 @@ class PoemsController < ApplicationController
 
     #poems_path
     def index
-      @poems = Poem.all
+      @poems = Poem.all.alphabetical
     end
 
     def new
-        #if params[:user_id] && @user = User.find_by(id: params[:user_id])
-         # @poem = @user.poems.build
-        #else
+        if params[:user_id] && @user = User.find_by(id: params[:user_id])
+         @poem = @user.poems.build
+        else
           @poem = Poem.new
-       # end
+        end
     end
 
     def create
