@@ -2,3 +2,23 @@
 <h4>Poem Posted By: <%=link_to @poem.user.name, user_path(@poem.user)%> </h4>
 
 <div><%= @poem.content%></div>
+
+<h3>Comments</h3>
+<ul>
+<% @poem.comments.each do |c|%>
+  <li><%= c.user.name%> says "<%= c.content%></li>
+<% end %>
+</ul>
+
+<% if @poem.user.comments == current_user.comments %>
+  <%= link_to "Edit Comment", edit_poem_comment_path(@poem)%>
+<% end %>
+
+<% if @poem.user == current_user %>
+<h4><%= link_to "Edit Poem", edit_poem_path(@poem)%></h4>
+<% end %>
+
+<p><%= link_to 'All Comments', poem_comments_path(@poem) %></p>
+
+<p><%= link_to 'Add a new comment', new_poem_comment_path(@poem)%></p>
+

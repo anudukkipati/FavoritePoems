@@ -1,6 +1,12 @@
-<% @poems.each do |poem| %>
- 
-  <h3><%= link_to poem.title, poem_path(poem) %></h3>
+<h3>All Poems</h3>
+  <ul>
+  <% @poems.each do |poem| %>
   
+    <li><%= link_to poem.title, poem_path(poem) %></li>
+    
 
-<% end %>
+  <% end %>
+</ul>
+
+
+

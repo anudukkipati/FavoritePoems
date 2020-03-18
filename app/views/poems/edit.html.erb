@@ -1,16 +1,4 @@
-<% if @poem.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@poem.errors.count, "error") %> prohibited this from being saved:</h2>
-
-    <ul>
-    <% @poem.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-<br><br>
-<br><br>
+<%= render partial: "layouts/errors", locals: {object: @poem} %>
 <h3>Edit <%= @poem.title%></h3>
 <%= form_for(@poem) do |f|%>
   <%= f.label :title %>
