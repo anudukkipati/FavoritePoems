@@ -15,6 +15,7 @@ body {
 header{
     background-color: #92a8d1;
 }
+
 .navbar ul li {
     /*font-weight: bold;*/
     font-size: 1em;
@@ -29,18 +30,13 @@ p {
 
 .center{
     text-align: center;
+   
     
 }
 h3{
     text-align: center;
 }
-/* forms */
-/*input, textarea, select{
-    border: 1px solid #bbb;
-    width: 100%;
-    margin-bottom: 15px;
-    @include box_sizing
-}*/
+
 .form-div{
     padding-top: 80px;
     width:30%;
@@ -70,6 +66,7 @@ h3{
 .user-poem{
     text-align: center;
 }
+
 
 #error_explanation{
     color: red;

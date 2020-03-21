@@ -1,18 +1,21 @@
-<h3>Edit Comment</h3>
 
-<%= render partial: "layouts/errors", locals: {object: @comment} %>
-<div>
-    <%= form_for(@comment) do |f|%>
+        <%= render partial: "layouts/errors", locals: {object: @comment} %>
+<div class ="row">
+    <div id="comment-container">
+        <h4>Edit Comment for <%= @comment.poem.title%></h4>
 
-      <div class="form-group">
+            <%= form_for(@comment) do |f|%>
 
-        <%= f.label :content %>
-        <%= f.hidden_field :poem_id %>
-        <%= f.text_field :content %>
-      <./div>
+              <div class="form-group">
 
-      <%= f.submit, class: "btn btn-primary" %>
+                <%= f.label :content %>
+                <%= f.hidden_field :poem_id %>
+                <%= f.text_field :content %>
+              </div>
 
-    <% end %>
+              <%= f.submit "Edit Comment", class: "btn btn-warning" %>
+
+            <% end %>
+    </div>
 </div>
-
+<h4>Go back to poem:<%= link_to @comment.poem.title, poem_path(@comment.poem_id) %></h4>

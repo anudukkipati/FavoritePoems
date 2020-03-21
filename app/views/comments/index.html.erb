@@ -8,11 +8,17 @@
 <div>
 <% @comments.each do |comment|%>
   <h4><strong><%= comment.user.name%></strong></h4>
-  <p><em><%= comment.content%></em> <%#= link_to comment.poem.title, poem_path(comment.poem_id) %></p>
+  <p><em><%= comment.content%></em> <%= link_to comment.poem.title, poem_path(comment.poem_id) %></p>
+<h4><a class="btn btn-warning btn-xs" href="/poems/<%= comment.poem.id %>/comments/<%= comment.id %>/edit">Edit Comment</a></h4>
+<form action= "/poems/<%= comment.poem.id %>/comments/<%= comment.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <button type="submit" class="btn btn-danger btn-xs">Delete Comment</button>
+  </form>
+
 <% end %>
 </div>
 <%#= link_to "Edit Comment", edit_poem_comment_path(@poem,@comment.id) %>
 
 
-
-<p><%= link_to "Go Back to the Poem", poem_path(@poem) %></p>
+<p><%#= link_to "Go Back to the Poem", poem_path(@poem) %></p>
