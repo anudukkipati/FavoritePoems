@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
    
   before_action :redirect_if_not_logged_in
   before_action :set_comment, only: [:show, :edit, :update]
-  before_action :redirect_if_not_comment_author, only: [:edit, :update]
+  before_action :redirect_if_not_authorised, only: [:edit, :update]
 
  def index
    if params[:poem_id] && @poem = Poem.find_by_id(params[:poem_id])
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
      @comment = @poem.comments.build
    else
      
-     @comment = Comment.new
+     @comment = Comment.new(poem_id: params[:poem_id])
    end
  end
 
@@ -34,9 +34,16 @@ class CommentsController < ApplicationController
 
 
  def show
+   @comment = Comment.find_by(id: params[:id])
  end
 
  def edit
+   if params[:poem_id] && @poem = Poem.find_by_id(params[:poem_id])
+     
+    @comment = Comment.find_by(id: params[:id])
+    @comment = @poem.comments.find_by(id: params[:id])
+     
+   end
  end
 
  def update
@@ -56,12 +63,12 @@ class CommentsController < ApplicationController
  def set_comment
    @comment = Comment.find_by(id: params[:id])
    if !@comment
-    # flash[:message] = "Comment was not found"
-     redirect_to comments_path, alert: "Comment was not found"
+     flash[:alert] = "Comment was not found"
+     redirect_to comments_path
    end
  end
 
- def redirect_if_not_comment_author
+ def redirect_if_not_authorised
     redirect_to comments_path if @comment.user != current_user
  end
         
