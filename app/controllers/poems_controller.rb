@@ -1,16 +1,14 @@
 class PoemsController < ApplicationController
-
+    
+  before_action :set_poem, only: [:show, :edit, :update, :destroy]
     #poems_path
     def index
       @poems = Poem.all.alphabetical
+      @comments = Comment.all
     end
 
     def new
-        if params[:user_id] && @user = User.find_by(id: params[:user_id])
-         @poem = @user.poems.build
-        else
           @poem = Poem.new
-        end
     end
 
     def create
@@ -23,17 +21,17 @@ class PoemsController < ApplicationController
     end
 
     def show
-      @poem = Poem.find_by(id: params[:id])
+     # @poem = Poem.find_by(id: params[:id])
       redirect_to poems_path if !@poem
     end
 
     def edit
-      @poem = Poem.find_by(id: params[:id])
+     # @poem = Poem.find_by(id: params[:id])
       redirect_to poems_path if !@poem || @poem.user != current_user
     end
     
     def update
-      @poem = Poem.find_by(id: params[:id])
+     # @poem = Poem.find_by(id: params[:id])
       redirect_to poems_path if !@poem || @poem.user != current_user
      if @poem.update(poem_params)
        redirect_to poem_path(@poem)
@@ -41,8 +39,18 @@ class PoemsController < ApplicationController
        render :edit
      end
    end
+
+   def destroy
+   # @poem = Poem.find_by(id: params[:id])
+    @poem.destroy
+    redirect_to poems_path
+   end
     private
       def poem_params
         params.require(:poem).permit(:title,:content)
+      end
+
+      def set_poem
+        @poem = Poem.find_by(id: params[:id])
       end
 end
