@@ -1,5 +1,5 @@
 class PoemsController < ApplicationController
-    
+  before_action :redirect_if_not_logged_in
   before_action :set_poem, only: [:show, :edit, :update, :destroy]
     #poems_path
     def index
