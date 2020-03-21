@@ -1,16 +1,18 @@
 <h3>Edit Comment</h3>
 
 <%= render partial: "layouts/errors", locals: {object: @comment} %>
+<div>
+    <%= form_for(@comment) do |f|%>
 
-<%= form_for(@comment) do |f|%>
+      <div class="form-group">
 
-  <%= f.label :poem %>
-  <%= f.collection_select :poem_id, Poem.all, :id, :title %>
+        <%= f.label :content %>
+        <%= f.hidden_field :poem_id %>
+        <%= f.text_field :content %>
+      <./div>
 
-  <%= f.label :content %>
-  <%= f.text_field :content %>
+      <%= f.submit, class: "btn btn-primary" %>
 
+    <% end %>
+</div>
 
-  <%= f.submit %>
-
-<% end %>

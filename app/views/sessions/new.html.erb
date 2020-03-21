@@ -1,16 +1,25 @@
-<h3>Login</h3>
-<%= form_for :user do |f| %>
+<div  class="row" > 
+  <div class="form-container">
+    <h3>Login</h3>
+        <%= form_for :user do |f| %>
+        <div class="form-group">
+            <%= f.label :email %><br>
+            <%= f.text_field :email %>
+          </div>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br>
+          <div class="form-group">
+              <%= f.label :password %><br>
+              <%= f.password_field :password %>
+          </div>
 
-   <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-   <br>
-    <br>
+          <%= f.submit "Login", class: "btn btn-primary" %>
 
-  <%= f.submit "Login" %>
+        <% end %>
+        <br>
 
-<% end %>
+    <%= link_to "Log In With Google", '/auth/google_oauth2' , class: "btn btn-primary"%>
+        <br><br>
+
+    <%= link_to "Sign Up", signup_path %>
+   </div>
+</div>

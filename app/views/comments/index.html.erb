@@ -5,8 +5,13 @@
   <h1>All Comments</h1>
 <% end %>
 
-<ul>
+<div>
 <% @comments.each do |comment|%>
-  <li><%= comment.user.name%> says "<%= comment.content%>" about this poem: <strong><%= link_to comment.poem.title, poem_path(comment.poem_id) %></strong></li>
+  <h4><strong><%= comment.user.name%></strong> says <em><%= comment.content%></em> <%= link_to comment.poem.title, poem_path(comment.poem_id) %></h4>
 <% end %>
-</ul>
+</div>
+<%#= link_to "Edit Comment", edit_poem_comment_path(@poem,@comment.id) %>
+
+
+
+<p><%= link_to "Go Back to the Poem", poem_path(@poem) %></p>

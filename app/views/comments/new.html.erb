@@ -1,25 +1,21 @@
 
 <%= render partial: "layouts/errors", locals: {object: @comment} %>
-
+<br> <br>
 <% if @comment.poem %>
-<h4>New Comment for <%= @comment.poem.title%></h4>
-<% else %>
-<h3>Choose a poem to add a comment:</h3>
-<% end %>
-<%= form_for([@comment.poem,@comment]) do |f|%>
-
- <% if !@comment.poem %>
-  <%= f.label :poem %>
-  <%= f.collection_select :poem_id, Poem.all, :id, :title %>
-<% else %>
-    <%= f.hidden_field :poem_id %>
+<h4>Add a Comment for <%= @comment.poem.title%></h4>
 <% end %>
 
-  <%= f.label :content %>
-  <%= f.text_field :content %>
 
+<%= form_for([@poem,@comment]) do |f|%>
+      
+   <%= f.label :content %>
+   <%= f.hidden_field :poem_id %>
+   <%= f.text_field :content %>
 
-  <%= f.submit %>
+   <%= f.submit %>
 
 <% end %>
 
+<p><%= link_to "Go Back to the Poem", poem_path(@poem) %><p>
+
+<p><%= link_to "Go back to Poems page", poems_path %>

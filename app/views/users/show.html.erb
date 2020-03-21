@@ -1,5 +1,5 @@
-<h3>Posted by <%=@user.name %></h3>
-  <div>
+<h3>Added by <%=@user.name %></h3>
+  <div class="container user-poem" >
     
     <% @user.poems.map do |poem| %>
        <h4> <%= link_to poem.title, poem_path(poem) %></h4>

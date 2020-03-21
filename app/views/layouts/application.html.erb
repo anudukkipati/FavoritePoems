@@ -8,26 +8,59 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     
+    
   </head>
 
   <body>
+      
+       <header class="navbar navbar-fixed-top navbar-light">
+         <div class="container">
         
-       <div>
-         <% if logged_in?%>
-            <%= link_to "Add a Poem", new_poem_path %> |
-            <%= link_to "All Poems", poems_path %> |
-            <%= link_to "Poems Posted by", user_path(current_user) %> <%= current_user.name %> |
-            <%= link_to "Add a Comment", new_comment_path %> |
-            <%= link_to "Home", root_path %> |
-            <%= link_to "Logout", logout_path, method:"delete"%>
-            Signed in as <%= current_user.name %>
-            <% else %>
-            
-            <%=link_to "Sign Up", signup_path %> |
-            <%= link_to "Log In With Google", '/auth/google_oauth2'%> |
-            <%=link_to "Log In", login_path %>
-      <% end %>
+       <nav>
+           <ul class="nav navbar-nav navbar-right">
+              <% if logged_in? %>
+                 <li> <%= link_to "Poems", poems_path %></li> 
+                 <li> <%= link_to "Add a Poem", new_poem_path %> </li>
+                  
+                  <li><%= link_to user_path(current_user) do %>
+                        <%= current_user.name %>'s Poems
+                  <% end %> </li>
+                  <li><%= link_to "Home", root_path %></li> 
+                  <li><%= link_to user_path(current_user) do %>
+                        Welcome <%= current_user.name %>
+                  <% end %> </li>
+                  <li><%= link_to "Logout", logout_path, method:"delete"%></li>
+
+               <% else %>
+                  
+                 <li><%=link_to "Sign Up", signup_path %></li>
+                  <li><%= link_to "Log In With Google", '/auth/google_oauth2'%> </li>
+                  <li><%=link_to "Log In", login_path %></li>
+              <% end %>
+            </ul>
+       </nav>
        </div>
-    <%= yield %>
+       </header>
+       <div class="center jumbotron">
+           <h1>Favorite Poems</h1>
+       </div>
+       <div class="container">
+      
+           <% if flash[:notice] %>
+              <div class="alert alert-success" role="alert">
+                <%= flash[:notice] %>
+              </div>  
+           <% end %>
+       
+          <% if flash[:alert] %>
+            <div class="alert alert-danger" role="alert">
+            <%= flash[:alert] %>
+            </div>
+        <% end %>
+        <div class="container">
+           <%= yield %>
+        </div>
+    </div>
+    
   </body>
 </html>

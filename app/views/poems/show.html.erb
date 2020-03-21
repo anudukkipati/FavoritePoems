@@ -1,24 +1,44 @@
 <h3><%=@poem.title%></h3>
-<h4>Poem Posted By: <%=link_to @poem.user.name, user_path(@poem.user)%> </h4>
+<h4 class="poem-title">Poem Added By: <%=link_to @poem.user.name, user_path(@poem.user)%> </h4>
 
-<div><%= @poem.content%></div>
+<div class="card poem-content" style="width: 34rem;">
+   <div class="card-body">
+     <%= @poem.content%>
+   </div>
 
-<h3>Comments</h3>
+ 
+      <br><br>
+      <% if @poem.user == current_user %>
+      <%= link_to "Edit Poem", edit_poem_path(@poem), class: "btn btn-info btn-sm" %> 
+      <%= link_to "Delete Poem", @poem, method: :delete, data: { confirm: "Really?" }, class: "btn btn-danger btn-sm" %>
+      <% end %>
+
+
+<br><br>
+<!-- <h3>Comments</h3>-->
+<!--<div>
 <ul>
-<% @poem.comments.each do |c|%>
-  <li><%= c.user.name%> says "<%= c.content%></li>
-<% end %>
+<%# @poem.comments.each do |comment|%>
+  <li><strong><%#= comment.user.name%></strong>  <em><%#= comment.content%></em></li>
+<%# end %>
 </ul>
 
-<% if @poem.user.comments == current_user.comments %>
-  <%= link_to "Edit Comment", edit_poem_comment_path(@poem)%>
-<% end %>
+</div>-->
 
-<% if @poem.user == current_user %>
-<h4><%= link_to "Edit Poem", edit_poem_path(@poem)%></h4>
-<% end %>
+  
 
-<p><%= link_to 'All Comments', poem_comments_path(@poem) %></p>
 
-<p><%= link_to 'Add a new comment', new_poem_comment_path(@poem)%></p>
+<%# if @poem.user.comments == current_user.comments %>
+    
+      <%#=# link_to "Edit Comment", edit_poem_comment_path(@poem)%>
+  
+<%# end %>
 
+    <div class="comments-content">
+
+        <p><%= link_to 'Add a comment', new_poem_comment_path(@poem), class: "btn btn-success"%></p>
+        <p><%= link_to 'Comments', poem_comments_path(@poem.id) %></p>
+        <p><%= link_to "Go back to Poems page", poems_path %>
+    </div>
+
+</div>

@@ -1,13 +1,6 @@
 <%= render partial: "layouts/errors", locals: {object: @poem} %>
 <h3>Edit <%= @poem.title%></h3>
-<%= form_for(@poem) do |f|%>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <br><br>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
 
+<%= render partial: 'form' %>
 
-  <%= f.submit %>
-
-<% end %>
+<p class="poem-edit"><%= link_to "Go Back to the Poem", poem_path(@poem), class: "btn btn-info" %><p>
