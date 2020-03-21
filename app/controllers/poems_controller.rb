@@ -1,6 +1,7 @@
 class PoemsController < ApplicationController
   before_action :redirect_if_not_logged_in
   before_action :set_poem, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_not_authorised, only: [:edit, :update]
     #poems_path
     def index
       @poems = Poem.all.alphabetical
@@ -27,12 +28,12 @@ class PoemsController < ApplicationController
 
     def edit
      # @poem = Poem.find_by(id: params[:id])
-      redirect_to poems_path if !@poem || @poem.user != current_user
+      #redirect_to poems_path if !@poem || @poem.user != current_user
     end
     
     def update
      # @poem = Poem.find_by(id: params[:id])
-      redirect_to poems_path if !@poem || @poem.user != current_user
+      #redirect_to poems_path if !@poem || @poem.user != current_user
      if @poem.update(poem_params)
        redirect_to poem_path(@poem)
      else
@@ -53,4 +54,8 @@ class PoemsController < ApplicationController
       def set_poem
         @poem = Poem.find_by(id: params[:id])
       end
+
+      def redirect_if_not_authorised
+        redirect_to poems_path if !@poem || @poem.user != current_user
+     end
 end

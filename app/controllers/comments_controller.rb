@@ -74,6 +74,7 @@ class CommentsController < ApplicationController
  end
 
  def redirect_if_not_authorised
+    flash[:alert] = "You do not have permission to do this"
     redirect_to comments_path if @comment.user != current_user
  end
         
