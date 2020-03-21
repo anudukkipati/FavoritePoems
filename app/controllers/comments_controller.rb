@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
    
   before_action :redirect_if_not_logged_in
-  before_action :set_comment, only: [:show, :edit, :update]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_not_authorised, only: [:edit, :update]
 
  def index
@@ -53,7 +53,12 @@ class CommentsController < ApplicationController
      render :edit
    end
  end
-
+ 
+ def destroy
+  
+   @comment.destroy
+   redirect_to comments_path
+  end
  private
 
  def comment_params
