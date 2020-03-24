@@ -56,6 +56,7 @@ class PoemsController < ApplicationController
       end
 
       def redirect_if_not_authorised
+        
         redirect_to poems_path if !@poem || @poem.user != current_user
      end
 end
