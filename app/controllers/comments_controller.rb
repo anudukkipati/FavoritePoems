@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
    
   before_action :redirect_if_not_logged_in
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_if_not_authorised, only: [:edit, :update]
+  before_action :redirect_if_not_authorised, only: [:edit, :update, :destroy]
 
  def index
    if params[:poem_id] && @poem = Poem.find_by_id(params[:poem_id])
@@ -28,6 +28,7 @@ class CommentsController < ApplicationController
    if @comment.save
      redirect_to comments_path
    else
+    @poem = Poem.find_by(id: params[:poem_id]) 
      render :new
    end
  end
@@ -74,7 +75,7 @@ class CommentsController < ApplicationController
  end
 
  def redirect_if_not_authorised
-    flash[:alert] = "You do not have permission to do this"
+    #flash[:alert] = "You do not have permission to do this"
     redirect_to comments_path if @comment.user != current_user
  end
         
