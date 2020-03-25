@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_action :redirect_if_not_authorised, only: [:edit, :update, :destroy]
 
  def index
-   if params[:poem_id] && @poem = Poem.find_by_id(params[:poem_id])
+   if params[:poem_id] && @poem = Poem.find_by(id: params[:poem_id])
       @comments = @poem.comments
    else
     
@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
  def new
    
-   if params[:poem_id] && @poem = Poem.find_by_id(params[:poem_id])
+   if params[:poem_id] && @poem = Poem.find_by(id: params[:poem_id])
      @comment = @poem.comments.build
    else
      
@@ -26,7 +26,9 @@ class CommentsController < ApplicationController
  def create
    @comment = current_user.comments.build(comment_params)
    if @comment.save
-     redirect_to comments_path
+     #redirect_to comments_path
+     redirect_to comment_path(@comment)
+    
    else
     @poem = Poem.find_by(id: params[:poem_id]) 
      render :new
@@ -39,11 +41,16 @@ class CommentsController < ApplicationController
  end
 
  def edit
-   if params[:poem_id] && @poem = Poem.find_by_id(params[:poem_id])
-     
-    @comment = Comment.find_by(id: params[:id])
+   if params[:poem_id] && @poem = Poem.find_by(id: params[:poem_id])
+     if @poem.nil?
+        flash[:alert] = "Poem doesn't exist!"
+       redirect_to poems_path
+     else
+    #@comment = Comment.find_by(id: params[:id])
     @comment = @poem.comments.find_by(id: params[:id])
-     
+     end
+    else
+      @comment = Comment.find_by(id: params[:id])
    end
  end
 
@@ -56,9 +63,11 @@ class CommentsController < ApplicationController
  end
  
  def destroy
-  
+  @poem = Poem.find_by(id: params[:poem_id])
    @comment.destroy
-   redirect_to comments_path
+   #redirect_to comments_path
+   #redirect_to poem_path(@comment.poem)
+   redirect_to poem_comments_path(@poem)
   end
  private
 
