@@ -1,7 +1,8 @@
 <h2><%= @comment.content%> - <%= @comment.user.name%></h2>
 
 <% if @comment.user == current_user %>
-  <%= link_to "Edit Comment", edit_comment_path(@comment), class: "btn btn-warning"%>
+  <%#= link_to "Edit Comment", edit_comment_path(@comment), class: "btn btn-warning"%>
+   <%= link_to "Edit Comment", edit_poem_comment_path(@comment.poem, @comment), class: "btn btn-warning"%>
   
 <% end %>
 
