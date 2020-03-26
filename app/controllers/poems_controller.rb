@@ -5,7 +5,7 @@ class PoemsController < ApplicationController
     #poems_path
     def index
       @poems = Poem.all.alphabetical
-      @comments = Comment.all
+      #@comments = Comment.all
     end
 
     def new

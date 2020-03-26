@@ -10,12 +10,16 @@
   <h4><strong><%= comment.user.name%></strong></h4>
   <p><em><%= comment.content%></em> <%= link_to comment.poem.title, poem_path(comment.poem_id) %></p>
     <% if comment.user == current_user %>
-        <h4><a class="btn btn-warning btn-xs" href="/poems/<%= comment.poem.id %>/comments/<%= comment.id %>/edit">Edit</a></h4>
-        <form action= "/poems/<%= comment.poem.id %>/comments/<%= comment.id %>" method="post">
+       <!-- <h4><a class="btn btn-warning btn-xs" href="/poems/<%= comment.poem.id %>/comments/<%= comment.id %>/edit">Edit</a></h4>-->
+        <%= link_to "Edit", edit_poem_comment_path(comment.poem.id, comment.id), class: "btn btn-warning btn-xs"%>
+        <br><br>
+       <!-- <form action= "/poems/<%= comment.poem.id %>/comments/<%= comment.id %>" method="post">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-        </form>
+        </form>-->
+        <%= button_to "Delete", { action: "destroy", id: comment.id },
+                                method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-xs" %>
     <% end %>
 <% end %>
 </div>
