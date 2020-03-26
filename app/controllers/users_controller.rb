@@ -12,7 +12,7 @@ class UsersController < ApplicationController
             flash[:notice] = "You have sucessfully created an account, #{@user.name}!"
             redirect_to @user
         else
-            flash[:alert] = "Account creation failed!, try again"
+            flash[:alert] = "Account creation failed: #{@user.errors.full_messages.to_sentence}"
             render :new
         end
 
