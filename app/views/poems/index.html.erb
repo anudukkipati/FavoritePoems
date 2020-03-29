@@ -1,12 +1,23 @@
-<h2>Poems</h2>
-  <div>
-  <% @poems.each do |poem| %>
-    <div>
-      <h4><%= link_to poem.title, poem_path(poem) %></h4>
-    
-    </div>
-  <% end %>
-</div>
 
+    <h2>Poems</h2>
+      <div>
+      <% @poems.each do |poem| %>
+        <div>
+          <h4><%= link_to poem.title, poem_path(poem) %></h4>
+        
+        </div>
+      <% end %>
+
+ 
+     </div>
+
+ 
+<%= form_tag '/search', method: 'get' do %>
+    <%= label_tag :Poem_by_first_letter %>
+    <%= text_field_tag :letter %>
+
+    <%= submit_tag("Search") %>
+
+<% end %>
 
 

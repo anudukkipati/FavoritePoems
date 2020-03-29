@@ -5,6 +5,8 @@ class PoemsController < ApplicationController
     #poems_path
     def index
       @poems = Poem.all.alphabetical
+      
+    
       #@comments = Comment.all
     end
 
@@ -46,6 +48,20 @@ class PoemsController < ApplicationController
     @poem.destroy
     redirect_to poems_path
    end
+   def letter
+     render :letter
+   end
+   def search
+      if params[:letter].blank?
+
+        redirect_to poems_path
+      else
+        @poems = Poem.all
+        @letter = params[:letter].upcase
+        @results = @poems.all.select{|poem|poem.title[0] == @letter}
+      end
+   end
+  
     private
       def poem_params
         params.require(:poem).permit(:title,:content)

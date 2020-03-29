@@ -5,4 +5,6 @@ class Poem < ApplicationRecord
   validates :content, :title, presence: true
 
   scope :alphabetical, -> { order(:title) }
+
+  
 end

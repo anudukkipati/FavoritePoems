@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
  get "/auth/:provider/callback" => 'sessions#google_auth'
  #get "/auth/google_oauth2/callback", to: "sessions#google_oauth"
+
+ #get "/letter", to: "poems#letter"
+ get "/search", to: "poems#search"
  
   resources :comments
   resources :poems do
