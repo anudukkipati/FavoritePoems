@@ -59,6 +59,7 @@ class PoemsController < ApplicationController
         @poems = Poem.all
         @letter = params[:letter].upcase
         @results = @poems.all.select{|poem|poem.title[0] == @letter}
+        #TODO: MAKE SURE IF YOU ACCOUNT FOR POEMS THAT ARE NOT FOUND IN THE SEARCH LIKE IF THE POEMS DON'T EXIST STARTING WITH SEARCHED ALPHABET
       end
    end
   
