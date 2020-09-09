@@ -1,5 +1,9 @@
 <h4>Search Result</h4>
+ 
+<div> 
   <% @results.each do |result| %>
-      <p><%= result.title %></p>
+          <p><%= link_to result.title, poem_path(result) %></p>
   <% end %>
-     
+
+  <p><%= link_to "Go back to Poems page", poems_path, class: "btn btn-success" %></p>
+</div>

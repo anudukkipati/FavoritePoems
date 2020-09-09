@@ -2,12 +2,11 @@ class PoemsController < ApplicationController
   before_action :redirect_if_not_logged_in
   before_action :set_poem, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_not_authorised, only: [:edit, :update]
-    #poems_path
+   
+  #poems_path
     def index
       @poems = Poem.all.alphabetical
       
-    
-      #@comments = Comment.all
     end
 
     def new
@@ -24,7 +23,7 @@ class PoemsController < ApplicationController
     end
 
     def show
-     # @poem = Poem.find_by(id: params[:id])
+    
       redirect_to poems_path if !@poem
     end
 
@@ -34,8 +33,7 @@ class PoemsController < ApplicationController
     end
     
     def update
-     # @poem = Poem.find_by(id: params[:id])
-      #redirect_to poems_path if !@poem || @poem.user != current_user
+     
      if @poem.update(poem_params)
        redirect_to poem_path(@poem)
      else
@@ -44,25 +42,23 @@ class PoemsController < ApplicationController
    end
 
    def destroy
-   # @poem = Poem.find_by(id: params[:id])
+   
     @poem.destroy
     redirect_to poems_path
    end
-   def letter
-     render :letter
-   end
+  
    def search
-      if params[:letter].blank?
+      if params[:letter].blank? 
 
         redirect_to poems_path
+      
       else
         @poems = Poem.all
         @letter = params[:letter].upcase
-        @results = @poems.all.select{|poem|poem.title[0] == @letter}
-        #TODO: MAKE SURE IF YOU ACCOUNT FOR POEMS THAT ARE NOT FOUND IN THE SEARCH LIKE IF THE POEMS DON'T EXIST STARTING WITH SEARCHED ALPHABET
+        @results = @poems.all.select{|poem|poem.title[0] == @letter} 
       end
    end
-  
+    
     private
       def poem_params
         params.require(:poem).permit(:title,:content)
